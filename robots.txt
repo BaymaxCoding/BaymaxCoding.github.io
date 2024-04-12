@@ -1,0 +1,5 @@
+
+User-agent:*
+Disallow:
+
+Sitemap: https://baymaxcoding.github.io/sitemap.xml

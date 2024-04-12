@@ -31,7 +31,7 @@ export default hopeTheme({
   sidebar,
 
   // 页脚
-  footer: '<a href="https://v2.vuepress.vuejs.org/">Powered by VuePress</a> | <a href="https://theme-hope.vuejs.press">Theme by VuePress Theme Hope</a> | MIT Licensed',
+  footer: '<a href="https://v2.vuepress.vuejs.org/">Powered by VuePress</a> | <a href="https://theme-hope.vuejs.press">Theme by VuePress Theme Hope</a> | <a href="https://github.com/BaymaxCoding/baymaxcoding.github.io/blob/main/LICENSE">MIT Licensed</a>',
   displayFooter: true,
 
   // 博客相关

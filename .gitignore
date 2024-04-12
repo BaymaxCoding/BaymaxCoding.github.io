@@ -6,3 +6,13 @@ docs/.vuepress/.cache
 docs/.vuepress/dist
 # 项目依赖
 node_modules
+
+node_modules/
+blog/.vuepress/.cache/
+blog/.vuepress/.temp/
+blog/.vuepress/dist/
+
+node_modules/
+blog/.vuepress/.cache/
+blog/.vuepress/.temp/
+blog/.vuepress/dist/

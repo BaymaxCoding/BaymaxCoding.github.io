@@ -1,458 +1,450 @@
 ---
-title: CSS（一）基本介绍和常用布局属性
-date: 2024-03-26
+title: HTML（二）常用标签
+date: 2024-03-04
 category:
 	- 前端
 tag:
 	- HTML
 ---
 
-## css层叠样式表
+# day02：列表、表格、表单
 
-style标签包裹
+> 目标：掌握嵌套关系标签的写法，使用列表标签布局网页
 
-``` html
-书写格式 
-选择器 {
- key：value
-}
+## 01-列表
+
+作用：布局内容排列整齐的区域。
+
+列表分类：无序列表、有序列表、定义列表。
+
+### 无序列表
+
+作用：布局排列整齐的**不需要规定顺序**的区域。
+
+标签：ul 嵌套 li，ul 是无序列表，li 是列表条目。
+
+```html
+<ul>
+  <li>第一项</li>
+  <li>第二项</li>
+  <li>第三项</li>
+  ……
+</ul>
 ```
 
-
-
-
-
-## 引入方式
-
-内部  style
-
-外部 使用link标签引入  rel关系属性 stylesheet、href .css文件位置
-
-行内 配合js  `<div style="color:red;"></div>`
-
-## 选择器
-
- 命名规范  单词小写-单词小写
-
-标签选择器  直接写标签所有指定标签都会被渲染
-
-类选择器  标签class属性可写多个 class = “c1 c2”  使用.xxx{}  一般用来设置样式
-
-id选择器  唯一性一个页面中只能使用一次  标签id属性 使用#xx{}  一般用来配合js使用
-
-通配符选择器 *{}  配置所有标签的属性  开发中清除标签的默认属性使用
-
-- 复合选择器
-
-  后代选择器  父标签+空格+ 子标签{}，被父标签包裹的指定子标签都会被渲染，包括孙子标签
-
-  子代选择器 父标签+>子标签{}，只会渲染子标签，孙子标签不生效
-
-  并集选择器 多个标签相同属性，说白还是标签选择器多个标签用逗号相隔
-
-  交集选择器  选择器+选择器{}满足多个条件的
-
-- 伪类选择器
-
-  选择器+：+对应属性{}
-
-  :hover鼠标悬停，:link访问前，:visited访问后,:active点击时
-
-  超过四个按LVHA顺序写
-
-- 结构伪类选择器 选择器:first-child 第一个 last-child最后一个
-
-  nth-child(n)指定哪个，小括号中的公式偶数标签2n奇数标签2n+1/2n-1,5的倍数标签5n找到第五个以后的标签n+5，找到第五个以前的标签-n+5，其中n的值从0开始推算
-
-- 伪元素选择器(创建一个假的标签。)  选择器::before  选择器::after  大类后面那个小箭头 用来放装饰性内容
-
-  > 必须要有content属性参数可以为空，默认行内模式显示，权重和选择器相同
-
-  ``` css
-  	div::before{
-              content: "1111";
-          }
-  ```
-
-  
-
-## div
-
-width 宽  height 高  background-color 背景色
-
-## 文字控制属性
-
-google浏览器默认文字大小16px
-
-font-size 字体大小单位px 无单位不生效
-
-font-weight 文字粗细 参数为数字 400 正常 700 加粗   normal正常   bold 加粗
-
-font-style文字倾斜 属性值 normal正常  italic 倾斜 一般不倾斜，用来清除倾斜效果
-
-line-height 行高段落中用 大小px  不加单位直接就是当前标签font-size属性的倍数 2就是2倍
-
-> 段落中每行文字中的空隙并不是行高 ，行高由文字的上间距+文本高度+下间距构成！！
+> 注意事项：
 >
-> 行高的测量方式从每行文字的最顶端或者最低端量到下一行文字的最顶端或者最低端
+> * ul 标签里面只能包裹 li 标签
+> * li 标签里面可以包裹任何内容
+
+### 有序列表
+
+作用：布局排列整齐的**需要规定顺序**的区域。
+
+标签：ol 嵌套 li，ol 是有序列表，li 是列表条目。
+
+```html
+<ol>
+  <li>第一项</li>
+  <li>第二项</li>
+  <li>第三项</li>
+  ……
+</ol>
+```
+
+> 注意事项：
 >
-> 盒子行高实现文字垂直居中，配置行高与盒子高度相同 ，原理：文字行高由文字的上边距+文字本身+文字的下边距构成 ，如盒子高100，则配置文字行高为100，行高的构成就变成42+16浏览器默认文字大小+ 42实现文字居中 注意！！！只适用与单行文字！！！！
+> * ol 标签里面只能包裹 li 标签
+> * li 标签里面可以包裹任何内容
 
-font-family 字体族  楷体，宋体  ，微软雅黑，可配置多个顺序即为优先级从左向右 最后一个一般设置为字体族名做兜底 无衬线字体和有衬线字体开发使用无衬线，可以直接copy大厂样式
+### 定义列表
 
-font 字体复合属性  用来设置网页文字的公共样式直接copy
+标签：dl 嵌套 dt 和 dd，dl 是定义列表，dt 是定义列表的标题，dd 是定义列表的描述 / 详情。
 
-> font字体的简写方式   倾斜 加粗 字号/行高 字体    必须按顺序写，字体和字号为必要属性也可以只写这两个属性
+```html
+<dl>
+  <dt>列表标题</dt>
+  <dd>列表描述 / 详情</dd>
+   ……
+</dl>
+```
 
-text-indent 缩进  数字+px  数字+em  用em跟着字体大小走2em就是缩进两个字
+![1680315652403](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680315652403.png)
 
-> 1em = 当前标签字号大小
-
-text-align 对其方式  left左对齐默认    center 居中   right 右对齐
-
-> 调整的是内容，不影响标签位置，如果给图片做居中则给图片的父级标签配置内容居中
-
-text-decoration 修饰线如删除线下划线   none无 underline下划线 line-through 删除线 overline上划线   一般用来去除超链接下划线 
-
-color字体颜色
-
-> 取值写法 单词、r，g，b  0-255、r，g，b，a a为0-1取值调节透明度 、十六进制写法#RRGGBB相同可简写#0000ff = #00f
+> 注意事项：
 >
-> 三原色rgb 红绿蓝
+> * dl 里面只能包含dt 和 dd
+> * dt 和 dd 里面可以包含任何内容
 
-``` css
-h1{
-    color: rgb(1,1,1);
-    color:rgba(1,1,1,0.3);
-}
+## 02-表格
+
+网页中的表格与 Excel 表格类似，用来展示数据。 
+
+![1680315690740](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680315690740.png)
+
+### 基本使用
+
+标签：table 嵌套 tr，tr 嵌套 td / th。 
+
+![1680315704565](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680315704565.png)
+
+
+
+> 提示：在网页中，**表格默认没有边框线**，使用 **border 属性**可以为表格添加边框线。 
+
+```html
+<table border="1">
+  <tr>
+    <th>姓名</th>
+    <th>语文</th>
+    <th>数学</th>
+    <th>总分</th>
+  </tr>
+  <tr>
+    <td>张三</td>
+    <td>99</td>
+    <td>100</td>
+    <td>199</td>
+  </tr>
+  <tr>
+    <td>李四</td>
+    <td>98</td>
+    <td>100</td>
+    <td>198</td>
+  </tr>
+  <tr>
+    <td>总结</td>
+    <td>全市第一</td>
+    <td>全市第一</td>
+    <td>全市第一</td>
+  </tr>
+</table>
 ```
 
-## css特性
+### 表格结构标签-了解
 
-继承性：子级继承父级的文字属性，如果标签有自己默认的样式，则不会继承
+作用：用表格结构标签把内容划分区域，让表格结构更清晰，语义更清晰。
 
-层叠性：后写的属性会覆盖之前写的属性，不同的属性则会叠加进去展示
+![1680315774950](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680315774950.png)
 
-选择器优先级 通配《标签《类《id《行内《分号前加!important提高权重慎用
+> 提示：表格结构标签可以省略。
 
-选中的范围越大优先级越低
+### 合并单元格
 
-> 复合选择器权重按复合选择器中选择器个数，对比顺序为行内-id-类-标签。继承样式的权重最低！ 
+作用：将多个单元格合并成一个单元格，以合并同类信息。 
 
-## emmet简写提高开发效率
+![1680315812998](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680315821325.png)
 
-div.box
+合并单元格的步骤：
 
-div#box
+1. 明确合并的目标
+2. 保留**最左最上**的单元格，添加属性（取值是**数字**，表示需要**合并的单元格数量**）
+   * **跨行合并**，保留最上单元格，添加属性 **rowspan**
+   * **跨列合并**，保留最左单元格，添加属性 **colspan**
+3. 删除其他单元格
 
-同级div+p
-
-父子div > p
-
-多个相同span*3
-
-指定内容  div{XX}
-
-  css 用首字符小写后面可以跟参数
-
-## 背景属性
-
-background-color
-
-background-image 背景图属性 uri(路径)
-
-background-repeat 填充方式，默认平铺就是复制，no-repeat,repeat,repeat-x,repeat-y
-
-background-position背景图位置调整【水平和垂直】 左右上下居中英文关键字，或者数字加像素。关于参数顺序关键字可以不按顺序，如只有一个关键字，另一方向默认居中，数字只写一个表示水平方向则垂直也为居中
-
-background-size 背景图缩放，属性值cover等比缩放完全覆盖背景区域，部分背景图看不见，contain等比完全装入背景去，部分背景区空白或者数字加像素，或者百分比根据盒子尺寸计算 
-
-background-attachement 背景固定参数值 fixed
-
-background 复合属性 背景色+背景图+填充方式+背图位置/缩放+背图固定 不分顺序
-
-## 显示模式
-
-1. 块级元素 独占一行 宽度默认为父级标签的100% 添加宽高属性生效 div
-
-2. 行内元素 一行多个 宽度由内容撑开，宽高属性不生效 如span
-
-3. 行内块元素 如img，由内容撑开，添加宽高属性生效
-
-- 转换显示模式
-
-  display 属性值block块  inline-block行内块，inline行内一般用前两个
-
-## 盒子模型
-
-| 内容区域      | 宽高                                                         |
-| ------------- | ------------------------------------------------------------ |
-| 内边距padding | 内容和盒子的边缘距离，单参数四个边都会修改，拉开内容和盒子距离 |
-| 边框线border  | 像素 线的类型  颜色不分顺序，类型solid实线、dashed虚线、点线dotted |
-| 外边距margin  | 盒子外围距离，单参数四个边都会修改拉开盒子距离               |
-
-> 三个属性均可以添加-方位名词做某个边的样式如padding-top、border-bottom、margin-left、margin-right
-
-### 简化写法
-
-padding： 上 右 下 左
-
-一个值四个方向均应用单值
-
-四个值 上右下左
-
-三个值 上左右下
-
-两个值上下左右
-
-### 盒子的计算
-
-- 默认（被内容撑大）
-
-  盒子尺寸 = 内容尺寸+border尺寸+内边距尺寸
-
-  解决撑大的方法，把最外层盒子做相应的减少或者使用内减模式box-sizing：borderbox属性
-
-### 版心居中
-
-盒子整体居中，让网页内容都在中间显示，盒子一定要有宽度属性，否则无法居中，  计算原理 浏览器全宽减去盒子宽度除以2
-
-margin
-
-### 清除默认样式
-
-去除标签的默认样式，通配符的方式 或者选择所有带默认属性的标签进行设置
-
-去除内边距外边距
-
-``` html
-*{
-padding:0;
-margin:0;
-box-sizing: border-box;启动内减避免撑大盒子
-}
+```html
+<table border="1">
+  <thead>
+    <tr>
+      <th>姓名</th>
+      <th>语文</th>
+      <th>数学</th>
+      <th>总分</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>张三</td>
+      <td>99</td>
+      <td rowspan="2">100</td>
+      <td>199</td>
+    </tr>
+    <tr>
+      <td>李四</td>
+      <td>98</td>
+      <!-- <td>100</td> -->
+      <td>198</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>总结</td>
+      <td colspan="3">全市第一</td>
+      <!-- <td>全市第一</td>
+      <td>全市第一</td> -->
+    </tr>
+  </tfoot>
+</table>
 ```
 
-去除有序无序的默认样式小黑点
+> 注意：不能跨表格结构标签合并单元格（thead、tbody、tfoot）。
 
-``` css
-li{
-    list-style:none;
-}
+## 03-表单
+
+作用：收集用户信息。
+
+使用场景：
+
+* 登录页面
+* 注册页面
+* 搜索区域
+
+### input 标签
+
+input 标签 type 属性值不同，则功能不同。 
+
+```html
+<input type="..." >
 ```
 
-### 元素溢出
+![1680315984539](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680315984539.png)
 
-元素超出盒子的处理情况
 
-overflow属性
 
-hidden超出隐藏
+### input 标签占位文本 
 
-scroll无论是否溢出显示滚动条  滚动条右，下
+占位文本：提示信息，文本框和密码框都可以使用。 
 
-auto超出后显示滚动条 滚动条右
+```html
+<input type="..." placeholder="提示信息">
+```
 
-### 外边距的问题
+### 单选框
 
-#### 合并现象
+常用属性
 
-当垂直排列的兄弟元素上边的下边距会和下面的上边距合并，自动选择较大的一个值来应用，解决方法只设置一个盒子的边距
+![1680316056402](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680316056402.png)
 
-#### 塌陷问题
 
-子父级标签如果子级添加上外边距会产生塌陷问题导致父级盒子一起向下移动，解决方式 取消子级的margin 设置父级的padding或者设置父级的overflow为hidden或者设置父级border-top，使用第一种方法，后两种方法是在不改变子盒子属性的情况下附加属性
 
-### 行内元素内外边距问题
+```html
+<input type="radio" name="gender" checked> 男
+<input type="radio" name="gender"> 女
+```
 
-行内元素直接添加margin和padding无法改变元素垂直的位置，通过行高属性改变垂直位置 line-height
+> 提示：name 属性值自定义。
 
-### 盒子的圆角属性
+### 上传文件 
 
-border-redius值可以px或者百分比，值的原理就是圆角半径
+默认情况下，文件上传表单控件只能上传一个文件，添加 multiple 属性可以实现文件多选功能。
 
-可以多个值和内外边距多值一个意思，没值会取对角
+```html
+<input type="file" multiple>
+```
 
-#### 正圆-头像
+### 多选框
 
-正方形盒子设置圆角属性值为宽高的一半或者50%（正方形最大就是百分之50再大也没效果）
+多选框也叫复选框，默认选中：checked。
 
-#### 胶囊
+```html
+<input type="checkbox" checked> 敲前端代码
+```
 
-长方形  ，圆角值为高的一半
+### 下拉菜单
 
-### 盒子的阴影
+![1680316175031](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680316175031.png)
 
-box-shadow
+标签：select 嵌套 option，select 是下拉菜单整体，option是下拉菜单的每一项。
 
-取值  x轴偏移量 Y轴偏移量 模糊半径 扩散半径 颜色 内外阴影(不写就是外)
+```html
+<select>
+  <option>北京</option>
+  <option>上海</option>
+  <option>广州</option>
+  <option>深圳</option>
+  <option selected>武汉</option>
+</select>
+```
 
-xy为必要值，默认外阴影，内阴影需要添加inset
+> 默认显示第一项，**selected** 属性实现**默认选中**功能。
 
-### css属性书写顺序
+### 文本域
 
-提高浏览区渲染效率
+作用：多行输入文本的表单控件。 
 
-1. 盒子属性
-2. 文字样式
-3. 圆角阴影等修饰属性
+![1680316238194](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680316238194.png)
 
-### 何时使用img
+```html
+<textarea>默认提示文字</textarea>
+```
 
-不作为装饰的时候使用，平常不重要的使用背景去实现
+> 注意点：
+>
+> * 实际开发中，使用 CSS 设置 文本域的尺寸
+> * 实际开发中，一般禁用右下角的拖拽功能
 
-### 盒子取负值
+### label 标签 
 
-可以对上一层盒子做覆盖
+作用：网页中，某个标签的说明文本。 
 
-### 标准流
+![1680316296894](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680316296894.png)
 
-默认的标签显示模式  ，如div独占一行，span行内可显示多个
+经验：用 label 标签绑定文字和表单控件的关系，增大表单控件的点击范围。 
 
-### 浮动-old
+![1680316314721](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680316314721.png)
 
-float属性 left基于父标签左对齐  right基于父标签右对齐
+* 写法一
+  * label 标签只包裹内容，不包裹表单控件
+  * 设置 label 标签的 for 属性值 和表单控件的 id 属性值相同
 
-特点，顶对齐，行内块元素特点，拖标（摆脱标准流控制）
+```html
+<input type="radio" id="man">
+<label for="man">男</label>
+```
 
-浮动后会脱离标准流的控制不再独占一行，盒子要么都浮动，要么都不浮动
+* 写法二：使用 label 标签包裹文字和表单控件，不需要属性 
 
-需要注意，父级如果宽度不够，则会超出内容
+```html
+<label><input type="radio"> 女</label>
+```
 
-#### 清除浮动！！脱标带来的问题
-
-如果父级标签没有高度，子级标签又有浮动，那么排版就会错乱。因为没有高度而浮动以后的标签又没有标准流那么就无法撑开盒子，导致排版错乱
-
-解决方法4种
-
-1. 额外标签法工作中一般类名为clearfix：在父元素的最后加一个块级元素 比如div   加css属性clear：both/left/right 清除哪个方位的浮动影响一般就用both
-
-2. 单伪元素法 写好模版直接调用类父级标签添加
-
-   ``` css
-   .clearfix::after{
-       content:"";
-       display:block;
-       clear:both;
-   }
-   ```
-
-3. 双伪元素法 （推荐）
-
-   ``` css
-   这里的before是为了解决外边距塌陷的问题
-   .clearfix::before,
-   .clearfix::after{
-       content:"";
-       display: table;
-   }
-   .clearfix::after{
-       clear:both;
-   }
-   ```
-
-4. overflow法 父元素添加overflow：hidden，检查父级范围
-
-### flex布局替代float
-
-弹性布局 ，不会出现脱标的情况
-
-
-
-为父级盒子添加display:flex构成弹性容器，里面的元素称为弹性盒子。默认主轴是以x轴的方向进行浮动，弹性盒子会自动挤压或者拉升。侧轴/交叉轴默认在垂直方向
-
-#### flex布局
-
-|                           |
-| ------------------------- |
-| display：flex创建flex容器 |
-
-- justify-content主轴对齐方式
-
-  | 属性值        | 效果                                                         |
-  | ------------- | ------------------------------------------------------------ |
-  | flex-start    | 默认值，从起点开始，也就是左对齐                             |
-  | flex-end      | 从终点开始也就是右对齐                                       |
-  | center        | 沿着主轴居中排列，盒子居中对齐                               |
-  | space-between | 延主轴均匀排列，间距在弹性盒子之间相等。计算规则父级宽减去所有子级元素宽剩下的均匀分配 |
-  | space-around  | 延主轴均匀排列，间距分布在盒子两侧。中间的间距是两边的二倍   |
-  | space-evenly  | 延主轴均匀排列，弹性盒子与容器之间的间距相等。均匀分配容器间距包括左右 |
-
-  
-
-- align-items当前盒子容器内所有盒子侧轴对齐方式给容器设置（这里注意，之前因为默认铺满的情况排查过，只有stretch在弹性盒子没有高度的情况下会铺满侧轴）
-
-  stretch 如果弹性盒子没有设置高度，那么弹性盒子的高会铺满，而宽就是内容的宽度
-
-  center弹性盒子延侧轴居中排列
-
-  flex-start沿着侧轴起点排列
-
-  flex-end沿着侧轴终点排列
-
-- align-self某个弹性盒子侧轴对齐方式给弹性盒子设置
-
-  参数同align-items
-
-- flex-direction修改主轴方向，则侧轴自动到反方向水平/垂直
-
-  row水平从左向右  默认
-
-  column垂直从上到下
-
-  row-reverse 水平从右向左
-
-  column-reverse 垂直从下向上
-
-- flex弹性伸缩比（弹性盒子）
-
-  整数数字，占用剩余父级盒子剩余尺寸的份数，通过剩余盒子按总份数拆分决定占比
-
-  默认情况主轴靠内容撑开，侧轴默认拉升
-
-- flex-wrap弹性盒子换行（容器）
-
-  因为默认不换行，所有的元素都会挤在一行均匀分配尺寸
-
-  wrap 换行
-
-  no-wrap 不换行 
-
-- align-content行对齐方式 对单行弹性盒子不生效
-
-  和主轴对齐方式属性一致
-
-### 名词
-
-通栏 宽度与浏览器窗口相同的盒子
-
-### 项目
-
-#### 网页中logo的制作技巧
-
-1. 单击跳转到首页
-
-2. 搜索引擎优化，提升网站搜索排名
-
-   实现方式  为a标签设置背景
-
-   ``` html
-   <h1>
-       <a>网站关键字</a>
-   </h1>
-   ```
-
-   
-
-#### 导航制作技巧
-
-使用无序列表包裹a标签
-
-避免堆砌，降级网站搜索排名
-
- ### outline属性去除input焦点框
-
-### vertical-align:middle
-
-行内块和行内垂直方向对齐方式
+> 提示：支持 label 标签增大点击范围的表单控件：文本框、密码框、上传文件、单选框、多选框、下拉菜单、文本域等等。 
+
+### 按钮
+
+```html
+<button type="">按钮</button>
+```
+
+![1680316426088](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680316426088.png)
+
+
+
+```html
+<!-- form 表单区域 -->
+<!-- action="" 发送数据的地址 -->
+<form action="">
+  用户名：<input type="text">
+  <br><br>
+  密码：<input type="password">
+  <br><br>
+
+  <!-- 如果省略 type 属性，功能是 提交 -->
+  <button type="submit">提交</button>
+  <button type="reset">重置</button>
+  <button type="button">普通按钮</button>
+</form>
+```
+
+> 提示：按钮需配合 form 标签（表单区域）才能实现对应的功能。
+
+## 04-语义化
+
+### 无语义的布局标签 
+
+作用：布局网页（划分网页区域，摆放内容）
+
+* div：独占一行
+* span：不换行
+
+```html
+<div>div 标签，独占一行</div>
+<span>span 标签，不换行</span>
+```
+
+### 有语义的布局标签
+
+![1680316535685](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680316535685.png)
+
+## 05-字符实体
+
+![1680316551064](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680316551064.png)
+
+## 06-综合案例一-体育新闻列表 
+
+![1680316581559](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680316581559.png)
+
+```html
+<ul>
+  <li>
+    <img src="./images/1.jpg" alt="">
+    <h3>主帅安东尼奥回西班牙休假 国青抵达海口进行隔离</h3>
+  </li>
+  <li>
+    <img src="./images/2.jpg" alt="">
+    <h3>梅州主帅：申花有强有力的教练组 球员体能水平高</h3>
+  </li>
+  <li>
+    <img src="./images/3.jpg" alt="">
+    <h3>马德兴:00后球员将首登亚洲舞台 调整心态才务实</h3>
+  </li>
+</ul>
+```
+
+## 07-综合案例二-注册信息
+
+![1680316627956](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680316627956.png)
+
+```html
+<h1>注册信息</h1>
+<form action="">
+  <!-- 表单控件 -->
+  <!-- 个人信息 -->
+  <h2>个人信息</h2>
+  <label>姓名：</label><input type="text" placeholder="请输入真实姓名">
+  <br><br>
+  <label>密码：</label><input type="password" placeholder="请输入密码">
+  <br><br>
+  <label>确认密码：</label><input type="password" placeholder="请输入确认密码">
+  <br><br>
+  <label>性别：</label>
+  <label><input type="radio" name="gender"> 男</label>
+  <label><input type="radio" name="gender" checked> 女</label>
+  <br><br>
+  <label>居住城市：</label>
+  <select>
+    <option>北京</option>
+    <option>上海</option>
+    <option>广州</option>
+    <option>深圳</option>
+    <option>武汉</option>
+  </select>
+  <!-- 教育经历 -->
+  <h2>教育经历</h2>
+  <label>最高学历：</label>
+  <select>
+    <option>博士</option>
+    <option>硕士</option>
+    <option>本科</option>
+    <option>大专</option>
+  </select>
+  <br><br>
+  <label>学校名称：</label><input type="text">
+  <br><br>
+  <label>所学专业：</label><input type="text">
+  <br><br>
+  <label>在校时间：</label>
+  <select>
+    <option>2015</option>
+    <option>2016</option>
+    <option>2017</option>
+    <option>2018</option>
+  </select>
+  --
+  <select>
+    <option>2019</option>
+    <option>2020</option>
+    <option>2021</option>
+    <option>2022</option>
+  </select>
+  <!-- 工作经历 -->
+  <h2>工作经历</h2>
+  <label>公司名称：</label><input type="text">
+  <br><br>
+  <label>工作描述：</label>
+  <br>
+  <textarea></textarea>
+  <br><br>
+  <!-- 协议 和 按钮 -->
+  <input type="checkbox"><label>已阅读并同意以下协议：</label>
+  <ul>
+    <li><a href="#">《用户服务协议》</a></li>
+    <li><a href="#">《隐私政策》</a></li>
+  </ul>
+  <br><br>
+  <button>免费注册</button>
+  <button type="reset">重新填写</button>
+</form>
+```
 

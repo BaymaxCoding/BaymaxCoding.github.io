@@ -1,270 +1,322 @@
 ---
-title: Html介绍和基本常用标签
-date: 2024-03-26
+title: HTML（一）介绍、常用标签
+date: 2024-03-02
 category:
 	- 前端
 tag:
 	- HTML
 ---
 
-## 标签语法
+> 阶段目标：掌握HTML、CSS常用布局技巧，能够独立制作网页。
 
-> html (Hyper Text Markup Language) 超文本标记语言
+# day01：HTML 基础
 
-``` html
-有开始标签和结束标签，简单辨别，包裹内容的标签即为双标签，特殊单标签<br>换行，<hr>水平线
-<h2>这是一个二级标题</h2>
-```
+> 目标：掌握标签基本语法，能够独立布局文章页。
 
-## 骨架
+## 01-今日课程介绍
 
-> 基本骨架包含html、head、body,其中html包裹所有标签，head标签中编写给浏览器需要识别的参数字符编码、css等，body中写网页中的内容主体。标签的关系分为兄弟标签和子父标签如html标签就是head和body的爸爸，head和body则为兄弟关系
+> 今日目标：掌握标签基本语法，能够独立布局文章页。
 
-``` html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- 浏览器识别数据 -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!-- 展现给用户的内容 -->
-</body>
-</html>
-```
+### 核心技术点
+* 网页组成
 
-## 基本排版标签
+* 排版标签
 
-> 开发中一般一个网页中只有一个h1标签 用来标识整个文章中的大标题或者用来展示LOGO
+* 多媒体标签及属性
 
-``` html
-<!-- 标题标签一共六级 h1-h6 -->
-<h1>一级标题</h1>
-<h2>二级标题</h2>
+* 综合案例一 - 个人简介
 
-<!-- 段落标签 标签包裹一段文字即为一个段落，段落间有空隙 -->
-<p>
-    这是第一个段落
-</p>
-<p>
-    这是第二个段落
-</p>
+  ![1680242340931](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680242340931.png)
 
-<!-- 换行标签， 浏览器不会识别文本中的换行符都会被当成一行解析必须使用换行符进行换行 -->
+* 综合案例二 - Vue 简介
+
+  ![1680242362352](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680242362352.png)
+
+  
+
+## 02-标签语法
+
+HTML 超文本标记语言——HyperText Markup Language。 
+
+* 超文本：链接
+* 标记：标签，带尖括号的文本
+
+![1680242502155](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680242502155.png)
+
+### 标签结构
+
+* 标签要成对出现，中间包裹内容
+* <>里面放英文字母（标签名）
+* 结束标签比开始标签多 /
+* 标签分类：双标签和单标签
+
+```html
+<strong>需要加粗的文字<strong>
 <br>
-
-<!-- 水平线标签 -->
 <hr>
 ```
 
-## 文本格式化标签
 
-> 加粗、删除线、斜体、下划线
 
-``` html
-<strong>加粗，b标签不常用</strong>
-<del>删除线，s标签不常用</del>
-<ins>下划线，u标签不常用</ins>
-<em>斜体，i标签不常用</em>
+![1680242555328](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680242555328.png)
+
+## 03-HTML骨架
+
+* html：整个网页
+* head：网页头部，用来存放给浏览器看的信息，例如 CSS
+  * title：网页标题
+* body：网页主体，用来存放给用户看的信息，例如图片、文字
+
+```html
+<html>
+  <head>
+    <title>网页标题</title>
+  </head>
+  <body>
+    网页主体
+  </body>
+</html>
 ```
 
-## 两种路径
-
-- 相对路径
-
-  相对于当前操作文件的一个路径，开发中常用相对路径。.表示当前目录，/表示进入文件夹，如当前目录的test.txt文件 `./test.txt`。或者当前目录的上一级目录的test.txt文件`../test.txt`
-
-- 绝对路径
-
-  windows下写盘符的，`C://img/test.txt`
-
-  linux和mac下直接就是从跟目录出发,`/img/text.txt`
-
-## 超链接标签
-
-> href 属性可指定一个网址需要写清楚协议如https://xxxx  ,也可写#不做任何跳转或者用相对路径跳转本地指定的页面也可以
+> 提示
 >
-> target 指定标签的打开方式当前页还是新开标签页
+> VS Code 可以快速生成骨架：在 HTML 文件（.html）中，!（英文）配合 Enter / Tab 键
 
-``` html
-<a href="https://www.baidu.com" target="_blank">点我打开百度</a>
+## 04-标签的关系
+
+> 作用：明确标签的书写位置，让代码格式更整齐
+
+* 父子关系（嵌套关系）：子级标签换行且缩进（Tab键）
+
+  ![1680255766672](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680255766672.png)
+
+* 兄弟关系（并列关系）：兄弟标签换行要对齐
+
+  ![1680255775150](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680255775150.png)
+
+  
+
+## 05-注释
+
+概念：注释是对代码的解释和说明，能够提高程序的可读性，方便理解、查找代码。
+
+注释不会再浏览器中显示。
+
+在 VS Code 中，**添加 / 删除**注释的快捷键：**Ctrl + /** 
+
+```html
+<!-- 我是 HTML 注释 -->
 ```
 
-## 图像标签
+## 06-标题标签
 
-> src 属性可写网络地址或指定路径
+一般用在新闻标题、文章标题、网页区域名称、产品名称等等。 
+
+```html
+<h1>一级标题</h1>
+<h2>二级标题</h2>
+<h3>三级标题</h3>
+<h4>四级标题</h4>
+<h5>五级标题</h5>
+<h6>六级标题</h6>
+```
+
+显示特点：
+
+* 文字加粗
+* 字号逐渐减小
+* 独占一行（换行）
+
+> 经验
 >
-> alt 属性 图片加载失败时描述图片的文字
+> 1. h1 标签在一个网页中只能用一次，用来放新闻标题或网页的 logo
+> 2. h2 ~ h6 没有使用次数的限制
+
+## 07-段落标签
+
+一般用在新闻段落、文章段落、产品描述信息等等。 
+
+```html
+<p>段落</p>
+```
+
+显示特点：
+
+* 独占一行
+* 段落之间存在间隙
+
+## 08-换行和水平线
+
+* 换行：br
+* 水平线：hr
+
+```html
+<br>
+<hr>
+```
+
+## 09-文本格式化标签
+
+作用：为文本添加特殊格式，以突出重点。常见的文本格式：加粗、倾斜、下划线、删除线等。 
+
+![1680314078647](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680314078647.png)
+
+> 提示：strong、em、ins、del 标签自带强调含义（语义）。 
+
+## 10-图像标签
+
+作用：在网页中插入图片
+
+```html
+<img  src="图片的 URL">
+```
+
+src用于指定图像的位置和名称，是 <img> 的必须属性。 
+
+### 图像属性
+
+![1680314152822](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680314152822.png)
+
+### 属性语法
+
+* 属性名="属性值"
+* 属性写在尖括号里面，标签名后面，标签名和属性之间用空格隔开，不区分先后顺序
+
+![1680314195951](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680314195951.png)
+
+## 11-路径
+
+概念：路径指的是查找文件时，从**起点**到**终点**经历的**路线**。 
+
+路径分类：
+
+* 相对路径：从当前文件位置出发查找目标文件
+* 绝对路径：从盘符出发查找目标文件
+  * Windows 电脑从盘符出发
+  * Mac 电脑从根目录出发
+
+### 相对路径
+
+查找方式：从**当前文件位置**出发查找目标文件
+
+特殊符号：
+
+* **/** 表示进入某个文件夹里面          → 文件夹名/
+* **. ** 表示当前文件所在文件夹           → ./
+* **..** 表示当前文件的上一级文件夹 → ../   
+
+![1680314322997](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680314322997.png)
+
+### 绝对路径
+
+查找方式：Windows 电脑从盘符出发；Mac 电脑从根目录（/）出发
+
+```html
+<img  src="C:\images\mao.jpg">
+```
+
+> 提示
 >
-> title 鼠标悬停图片时显示的文本
+> 1. Windows 默认是 \ ，其他系统是 /，建议统一写为 / 
+> 2. 特殊的绝对路径 → 文件的在线网址：<https://www.itheima.com/images/logo.png> "，应用场景：网页底部**友情链接**
+
+![1680314503056](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680314503056.png)
+
+## 12-超链接标签
+
+作用：点击跳转到其他页面。 
+
+```html
+<a href="https://www.baidu.com">跳转到百度</a>
+```
+
+**href 属性值是跳转地址，是超链接的必须属性。**
+
+超链接默认是在当前窗口跳转页面，添加 **target="_blank"** 实现**新窗口**打开页面。
+
+拓展：开发初期，不确定跳转地址，则 href 属性值写为 **#**，表示**空链接**，页面不会跳转，在当前页面刷新一次。
+
+```html
+<a href="https://www.baidu.com/">跳转到百度</a>
+
+<!-- 跳转到本地文件：相对路径查找 --> 
+<!-- target="_blank" 新窗口跳转页面 --> 
+<a href="./01-标签的写法.html" target="_blank">跳转到01-标签的写法</a>
+
+<!-- 开发初期，不知道超链接的跳转地址，href属性值写#，表示空链接，不会跳转 -->
+<a href="#">空链接</a>
+```
+
+## 13-音频
+
+```html
+<audio src="音频的 URL"></audio>
+```
+
+常用属性
+
+![1680314629860](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680314629860.png)
+
+> 拓展：书写 HTML5 属性时，如果属性名和属性值相同，可以简写为一个单词。 
+
+```html
+<!-- 在 HTML5 里面，如果属性名和属性值完全一样，可以简写为一个单词 -->
+<audio src="./media/music.mp3" controls loop autoplay></audio>
+```
+
+## 14-视频
+
+```html
+<video src="视频的 URL"></video>
+```
+
+常用属性
+
+![1680314703735](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680314703735.png)
+
+```html
+<!-- 在浏览器中，想要自动播放，必须有 muted 属性 -->
+<video src="./media/vue.mp4" controls loop muted autoplay></video>
+```
+
+## 15-综合案例一-个人简介
+
+> 网页制作思路：从上到下，先整体再局部，逐步分析制作
 >
-> 宽高一般用样式控制，缩放为等比例缩放
+> 分析内容 → 写代码 → 保存 → 刷新浏览器，看效果
 
-``` html
-<img src="./123.png" alt="加载失败显示的文本">
+![1680314754557](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680314754557.png)
+
+```html
+<h1>尤雨溪</h1>
+<hr>
+<p>尤雨溪，前端框架<a href="../17-综合案例二/vue简介.html">Vue.js</a>的作者，<a href="#">HTML5</a>版Clear的打造人，独立开源开发者。曾就职于Google Creative Labs和Meteor Development Group。由于工作中大量接触开源的项目<a href="#">JavaScript</a>，最后自己也走上了开源之路，现全职开发和维护<a href="#">Vue.js</a>。
+
+</p>
+<img src="./photo.jpg" alt="尤雨溪的照片" title="尤雨溪">
+<h2>学习经历</h2>
+<p>尤雨溪毕业于上海复旦附中，在美国完成大学学业，本科毕业于Colgate University，后在Parsons设计学院获得Design & Technology艺术硕士学位，任职于纽约Google Creative Lab。</p>
+<h2>主要成就</h2>
+<p>尤雨溪<strong>大学专业并非是计算机专业</strong>，在大学期间他学习专业是室内艺术和艺术史，后来读了美术设计和技术的硕士， <ins>正是在读硕士期间，他偶然接触到了JavaScript ，从此被这门编程语言深深吸引，开启了自己的前端生涯</ins> 。</p>
+<p>2014年2月，开发了一个前端开发库Vue.js。Vue.js 是构建 Web 界面的 JavaScript 框架，是一个通过简洁的API提供高效的数据绑定和灵活的组件系统。</p>
+<h2>社会任职</h2>
+<p>2016年9月3日，在南京的JSConf上，Vue作者尤雨溪正式宣布加盟阿里巴巴Weex团队，尤雨溪称他将以技术顾问的身份加入Weex团队来做 Vue 和 Weex 的 JavaScript runtime 整合，目标是让大家能用 Vue 的语法跨三端。</p>
 ```
 
-## 音频和视频标签
+## 16-综合案例二-Vue简介
 
-> 共同属性src 资源地址  controls控制面板、autoplay自动播放、loop循环播放
->
-> src为必要属性，后面的三个属性参数与属性名一致直接简写本身即可
->
-> 需要注意的是自动播放，为提升用户体验浏览器禁用了自动播放的功能，所以添加了属性也没用，必须手动点击播放按钮，但是视频标签还有个静音属性muted当添加了这个属性也添加了自动播放的属性那么等网页加载完成会自动播放
+![1680314805528](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680314805528.png)
 
-``` html
-	<audio src="./123.mp3" controls autoplay loop ></audio>
-    <video src="./123.mp4" controls autoplay muted loop></video>
-```
-
-## 列表
-
-> 无序列表 ul标签里面只能包含li标签li标签中可以包含其他标签
->
-> 有序列表 ol标签里面只能包含li标签li标签中可以包含其他标签
->
-> 定义列表 dl标签里面只能包含dt和dd标签dt和dd可以包含其他标签，dt是列表标题，dd是描述/详情
-
-``` html
-	<ul>
-        <li>无序列表</li>
-        <li>无序列表</li>
-        <li>无序列表</li>
-    </ul>
-
-    <ol>
-        <li>有序列表</li>
-        <li>有序列表</li>
-        <li>有序列表</li>
-    </ol>
-
-    <dl>
-        <dt>标题1</dt>
-        <dd>详情1</dd>
-        <dd>详情1</dd>
-        <dt>标题2</dt>
-        <dd>详情2</dd>
-        <dd>详情2</dd>
-    </dl>
-```
-
-## 表格
-
-|       |                                |
-| ----- | ------------------------------ |
-| table | 表格标签，默认无样式需添加属性 |
-| tr    | 行标签                         |
-| th    | 表格头部标签                   |
-| td    | 表格内容标签                   |
-
-> 结构标签 thead、tbody、tfoot使结构清晰无视觉变化可省略，注意合并行和合并列禁止跨结构
-
-> 合并单元格分为跨行合并和跨列合并，跨行合并保留最上面一行删除其他行，跨列合并保留最左边删除其他列属性分别为rowspan、colspan  参数为合并的个数
-
-``` html
-	<table border="2px">
-        <thead>
-            <tr>
-                <th>姓名</th>
-                <th>年龄</th>
-                <th>性别</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>张三</td>
-                <td>18</td>
-                <td rowspan="2">男</td>
-            </tr>
-            <tr>
-                <td>李四</td>
-                <td>28</td>
-                <!-- <td>男</td> -->
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td>住址</td>
-                <td colspan="2">地球村</td>
-                <!-- <td>地球村</td> -->
-            </tr>
-        </tfoot>
-    </table>
-```
-
-## 表单
-
-input单标签，type属性包含文本text、密码password、单选radio、多选框checkbox、文件file。placeholder属性可以配置文本框和密码框中的提示信息。其中radio包含name属性参数自定义与其他选项一致构成一个组实现单选其中某一个。单选和多选有一个共同是否默认选中的属性checked。file有一个多文件上传的属性multiple。
-
-``` html
-	text <input type="text" placeholder="这是一个文本框">
-    password <input type="password" placeholder="这是一个密码框">
-
-
-    <input type="radio" name="gender" checked>男
-    <input type="radio" name="gender"> 女
-
-    爱好
-    <input type="checkbox" checked >唱
-    <input type="checkbox">跳
-    <input type="checkbox" checked>rap
-
-    <input type="file" multiple>
-```
-
-## 下拉菜单
-
-``` html
-	<select>
-        <option value="" selected></option>
-    </select>
+```html
+<h1>Vue.js</h1>
+<p>Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式JavaScript框架。 [5] 与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用（SPA）提供驱动。</p>
+<p>其作者为<a href="../16-综合案例一/个人简介.html" target="_blank">尤雨溪</a></p>
+<h2>主要功能</h2>
+<p>Vue.js是一套构建用户界面的渐进式框架。与其他重量级框架不同的是，Vue采用自底向上增量开发的设计。Vue 的核心库只关注视图层，并且非常容易学习，非常容易与其它库或已有项目整合。另一方面，Vue 完全有能力驱动采用单文件组件和Vue生态系统支持的库开发的复杂单页应用。</p>
+<p>Vue.js 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。</p>
+<p>Vue.js 自身不是一个全能框架——它只聚焦于视图层。因此它非常容易学习，非常容易与其它库或已有项目整合。另一方面，在与相关工具和支持库一起使用时 [2] ，Vue.js 也能驱动复杂的单页应用。</p>
+<video src="../media/vue.mp4" controls></video>
 ```
 
 
 
-## 文本域
-
-一般禁用拖拽大小的功能   textarea标签
-
-resize:none 禁用拖拽大小
-
-## label
-
-扩大表单控件的点击范围提升用户体验 ，id和for标签绑定实现，或者直接包裹表单控件。所有表单控件都可以配合使用
-
-```  html
-	<input type="radio" name="gender" checked id="man"> <label for="man">男</label> 
-    <label><input type="radio" name="gender"> 女</label>
-```
-
-## 按钮
-
-button  type属性submit提交表单数据默认属性、reset 重置、button 配合js使用
-
-需要配合form标签包裹所有表单控件使用，否则提交和重置不生效
-
-## 布局标签
-
-div独占一行
-
-span 一行可以多个
-
-## 常用字符实体
-
-&nbsp 空格
-
-&lt 小于
-
-&gt大于
-
-# 补充一个form表单属性
-
-input输入框历史记录的开关
-
-``` html
-<form action="" autocomplete="off">
-```
-
-还有h5新增input 的一个属性required 不能为空

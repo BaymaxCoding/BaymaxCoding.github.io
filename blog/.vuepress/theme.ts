@@ -29,6 +29,8 @@ export default hopeTheme({
 
   // 侧边栏
   sidebar,
+  // 自动生成侧边栏的排序规则
+  sidebarSorter:["date"],
 
   // 页脚
   footer: '<a href="https://v2.vuepress.vuejs.org/">Powered by VuePress</a> | <a href="https://theme-hope.vuejs.press">Theme by VuePress Theme Hope</a> | <a href="https://github.com/BaymaxCoding/baymaxcoding.github.io/blob/main/LICENSE">MIT Licensed</a>',

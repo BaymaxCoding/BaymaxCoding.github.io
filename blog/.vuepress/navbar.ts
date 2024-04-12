@@ -1,11 +1,11 @@
 import { navbar } from "vuepress-theme-hope";
 
 export default navbar([
-  ,{
-    text: '文章',
-    icon: 'iconfont icon-icon-article',
-    link: '/article/'
-  },
+  // ,{
+  //   text: '文章',
+  //   icon: 'iconfont icon-icon-article',
+  //   link: '/article/'
+  // },
   {
     text: "分类",
     icon: "iconfont icon-category",

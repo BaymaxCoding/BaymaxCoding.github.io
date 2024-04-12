@@ -1,7 +1,10 @@
-import { sidebar } from "vuepress-theme-hope";
+import { sidebar} from "vuepress-theme-hope";
 
 export default sidebar({
   "/posts/web/html":"structure",
+  "/posts/web/javascript/basis":"structure",
+  "/posts/web/javascript/api":"structure",
+  "/posts/web/javascript/advance":"structure",
   "/command/linux/": [
     {
       text: 'linux命令',

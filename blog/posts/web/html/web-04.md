@@ -1,551 +1,505 @@
 ---
-title: CSS（三）平面转换、动画、移动适配、less、bootstrap
-date: 2024-03-26
+title: CSS美化（二）常用标签
+date: 2024-03-10
 category:
 	- 前端
 tag:
 	- HTML
 ---
 
-### 平面转换-2D转换
+# day04-CSS进阶
 
-为元素添加动态效果，配合过渡使用
+> 目标：掌握复合选择器作用和写法；使用background属性添加背景效果
 
-改变盒子在平面内的形态（位移，旋转，缩放，倾斜）
+## 01-复合选择器
 
-transform：
+定义：由两个或多个基础选择器，通过不同的方式组合而成。
 
-#### 属性-平移
+作用：更准确、更高效的选择目标元素（标签）。
 
-translate（x移动距离,y移动距离）
+### 后代选择器
 
-距离可写像素，百分比（参照盒子自身的尺寸），正负值，
+后代选择器：**选中某元素的后代元素**。
 
-只写一个值的时候沿着x轴移动，  也可以使用translatex（）或者translatey（）
+选择器写法：父选择器  子选择器 { CSS 属性}，父子选择器之间用**空格**隔开。
 
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-27_18-32-46.png)
+```html
+<style>
+  div span {
+    color: red;
+  }
+</style>
+<span> span 标签</span>
+<div>
+  <span>这是 div 的儿子 span</span >
+</div>
+```
 
-#### 属性-旋转
+### 子代选择器
 
-rotate（旋转角度deg）  deg为单位
+子代选择器：选中某元素的子代元素（**最近的子级**）。
 
-正负值为顺时针或者逆时针
+选择器写法：父选择器 > 子选择器 { CSS 属性}，父子选择器之间用 **>** 隔开。
 
-#### 原点变换（缩放，旋转）
+```html
+<style>
+  div > span {
+    color: red;
+  }
+</style>
 
-默认旋转原点是盒子的中心通过transform-origin ：x y 改变原点位置常用就是方位名词，也可以取像素、百分比，谁转在谁身上加属性，比如按盒子底部中间去旋转   属性就是 center bottom
+<div>
+  <span>这是 div 里面的 span</span>
+  <p>
+    <span>这是 div 里面的 p 里面的 span</span>
+  </p>
+</div>
 
-#### 属性-多重转换
+```
 
-也就是transform的复合属性 ，先平移，再旋转
+### 并集选择器
 
-transform: translate(800px)  rotate(360deg)
+并集选择器：选中**多组标签**设置**相同**的样式。
 
-注意1，旋转会改变坐标轴向，也就是x轴会随着旋转的度数转一圈，如果此时复合属性中先旋转后平移的话就会造成，x轴在转，同时也在平移造成盒子由内到外的旋转，因为多重转换以第一个属性的轴为准，所以一般涉及平移和旋转的操作，平移参数要写旋转参数前头
+选择器写法：选择器1, 选择器2, …, 选择器N { CSS 属性}，选择器之间用 **,** 隔开。
 
-注意2 ，属性不能分开写，因为后面写的css会覆盖前面的css，层叠性
+```html
+<style>
+  div,
+  p,
+  span {
+    color: red;
+  }
+</style>
 
-#### 属性-缩放
+<div> div 标签</div>
+<p>p 标签</p>
+<span>span 标签</span>
+```
 
-如果修改宽高触发的话，会从左上角缩放，效果不对，应该以中心点缩放
+### 交集选择器 
 
-scale（缩放倍数）x，y等比缩放 /scale（X轴倍数，Y轴倍数）
+交集选择器：选中**同时满足多个条件**的元素。
 
-中间值为1 ，大于放大小于缩小
+选择器写法：选择器1选择器2 { CSS 属性}，选择器之间连写，没有任何符号。 
 
-#### 属性-倾斜
+```html
+<style>
+  p.box {
+  color: red;
+}
+</style>
 
-skew(xxdeg)  ，取值角度
+<p class="box">p 标签，使用了类选择器 box</p>
+<p>p 标签</p>
+<div class="box">div 标签，使用了类选择器 box</div>
+```
 
-#### 属性-渐变
+> 注意：如果交集选择器中有标签选择器，标签选择器必须书写在最前面。 
 
-一般用于盒子背景
+### 伪类选择器 
 
-分为线性渐变/径向渐变
+伪类选择器：伪类表示元素**状态**，选中元素的某个状态设置样式。
 
-##### 线性渐变
+鼠标悬停状态：**选择器:hover { CSS 属性 }**
 
-background-image：linear-gradient（渐变方向，颜色1 终点位置，颜色2 终点位置....）
-
-终点位置可写可不写，取值为%
-
-渐变方向可写to+方位名词/角度度数
-
-渐变默认由上到下
-
-linear-gradient（to right,xx 80%,xx 20%）
-
-transparent 透明关键字可作为颜色
-
-##### 径向渐变
-
-一般用于提升按钮立体
-
-radial-gradient（半径 at 圆心位置，颜色1 终点位置，颜色2 终点位置....）
-
-半径的取值可以是两条，变为椭圆渐变
-
-圆心取值可为像素、百分比、方位名词
-
-### 空间转换X，Y，Z
-
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-28_21-02-37.png)
-
-z轴的方向和视线的方向相同
-
-#### 空间-平移
-
-默认状态无法观察 z轴的平移效果，因为电脑也是平面的
-
-transform: translate3d(x,y,z) 三个值缺一不可
-
-transform: translatex()
-
-transform:translatey()
-
-transform:translatez() 
-
-参数可取像素，正负值都可以或者百分比参照盒子的大小计算
-
-##### 视距perspective
-
-指定观察者与z=0平面距离，为元素添加透视效果（近大远小，近实远虚）
-
-参数直接加给父级（必须直接父级），取值范围最佳为800-1200
-
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-28_21-11-10.png)
-
-#### 空间-旋转
-
-一定要配合视距属性使用才有正常的视觉效果
-
-transform:rotateZ()
-
-rotateZ的旋转和正常旋转一样，因为都是在中心点
-
-transform:rotateX()
-
-transform:rotateY()
-
-注意，旋转会改变坐标轴方向，如果一个平面以x轴旋转90度，那么他的视距z就会变道上面，根据z轴可以推断x，y轴的方向做平移等操作
-
-##### 左手法则
-
-用于根据原型图，判断旋转取值的正负
-
-左手握住旋转轴，拇指指坐标轴正数方向，其他四个手指的弯曲方向即为正值方向，反之为负值
-
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-28_21-50-29.png)
-
-##### 拓展（不常用）
-
-rotate3d（x,y,z,角度度数），用来设置自定义旋转轴的位置以及旋转的角度
-
-x,y,z 取值为0-1之间的数字
-
-#### 立体呈现
-
-transform-style 该参数加给父级，取值flat为子级处为平面中preserve-3d子级处于3d空间中
-
-作用：设置子元素位于3d空间中还是平面空间中
-
-注意，每个盒子都有自己的坐标轴，互相不影响 
-
-操作步骤
-
-1. 父元素添加transform-style:preserve-3d
-2. 子级定位
-3. 调整盒子的位置（位移或者旋转）
-
-#### 空间-缩放
-
-transform:scale(x,y,z);
-
-transform:scaleX();
-
-transform:scaleY();
-
-transform:scaleZ();
-
-参数同平面缩放
-
-### 动画-animation
-
-过度和动画的区别
-
-过渡实现两个状态间的变化过程
-
-动画，实现多个状态间的变化过程，动画过程可控（重复播放，最终画面，是否暂停）
-
-#### 定义动画
-
-``` css
-@keyframes 动画名称{
-    from{
-        
-    }
-    to{
-        
-    }
+```html
+<style>
+  a:hover {
+    color: red;
+  }
+  .box:hover {
+    color: green;
+  }
+</style>
+
+<a href="#">a 标签</a>
+<div class="box">div 标签</div>
+```
+
+#### 超链接伪类
+
+![1680319272736](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680319272736.png)
+
+> 提示：如果要给超链接设置以上四个状态，需要按 LVHA 的顺序书写。 
+>
+> 经验：工作中，一个 a 标签选择器设置超链接的样式， hover状态特殊设置 
+
+```css
+a {
+  color: red;
 }
 
-@keyframes 动画名称{
-    0%{
-        
-    }
-    10%{
-        
-    }
-    ...
-    100%{
-        
-    }
+a:hover {
+  color: green;
 }
 ```
 
-第一种写法控制两个状态
+## 02-CSS特性
 
-第二个写法控制过程中的状态，其中百分比表示动画时长的百分比
+CSS特性：化简代码 / 定位问题，并解决问题
 
-animation：动画名称 动画时长，谁的动画属性就加给谁
+* 继承性
+* 层叠性
+* 优先级
 
-#### 属性
+### 继承性
 
-animation:动画名称 动画时长 速度曲线 延迟时间 重复次数 动画方向 执行完毕时的状态
+继承性：子级默认继承父级的**文字控制属性**。 
 
-取值不分前后顺序，动画名称 动画时长必填
+![1680319376438](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680319376438.png)
 
-如有两个时间值，第一个表示时长，第二个表示延迟
+> 注意：如果标签有默认文字样式会继承失败。 例如：a 标签的颜色、标题的字体大小。
 
-速度曲线可取 linear匀速，steps（2）分部展示 参数可变，一般用于精灵图动画
+### 层叠性
 
-重复次数 infinite的话就是无限播放
+特点：
 
-动画方向 alternate  反向
+* 相同的属性会覆盖：**后面的 CSS 属性覆盖前面的 CSS 属性**
+* 不同的属性会叠加：**不同的 CSS 属性都生效**
 
-完成时的状态 forwards结束时的状态，backwards开始时的状态（默认）
+```html
+<style>
+  div {
+    color: red;
+    font-weight: 700;
+  }
+  div {
+    color: green;
+    font-size: 30px;
+  }
+</style>
 
-##### 拆分属性写法
-
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-29_10-09-03.png)
-
-#### 无缝动画实现
-
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-29_10-23-21.png)
-
-如图， 框中只能显示三张图片一共7张，每张图片宽为200px，实现滚动动画的话需要往左动画1400px，但动画完成后框中会留三张图片的宽度，所以根据框中可以承载内容的宽度再去复制内容的开头，也就是如图再去复制开头三张照片做填充，项目中根据实际情况填充
-
-#### 逐帧动画
-
-看起来平滑的是补间动画，看起来一跳一跳的就是逐帧动画
-
-利用动画的速度曲线steps（）实现 
-
-##### 精灵动画
-
-1. 准备显示区域
-2. 定义动画 移动背景，移动的距离=精灵图的宽度
-3. 使用动画steps（N），n与小图的个数相同
-
-#### 多组动画
-
-animation:动画1，动画2,....;
-
-每组动画包含名称 时长 等必要参数中间用空格隔开，动画间用，号
-
-省略from，比如盒子的默认位置就是translate（0），动画要移动到800px的位置，那么可以直接to{}
-
-### 移动适配
-
-- rem
-
-- vw
-
-缩放比计算  就是除以对应缩放比如1920 /150
-
-物理分辨率 实体硬件的大小
-
-逻辑分辨率 操作系统调节的大小，一般参考逻辑分辨率开发 
-
-#### 视口
-
-- 手机屏幕尺寸不同，网页宽度均为100%
-- 网页的宽度与逻辑分辨率尺寸相同
-
-注意：移动端默认分辨率的宽和逻辑宽不一致，pc一致
-
-为了匹配移动端与逻辑宽，使用视口标签来约束html尺寸
-
-``` html
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div>div 标签</div>
 ```
 
-自动生成的，不用管，认识就行
+> 注意：选择器类型相同则遵循层叠性，否则按选择器优先级判断。 
 
-width=device-width ： 视口宽度=设备宽度
+### 优先级
 
-initial-scale=1.0   缩放1倍（不缩放）
+优先级：也叫权重，当一个标签**使用了多种选择器时**，基于不同种类的选择器的**匹配规则**。
 
-#### 二倍图
+```html
+<style>
+  div {
+    color: red;
+  }
+  .box {
+    color: green;
+  }
+</style>
 
-防止图片在高分辨率屏幕下失真
+<div class="box">div 标签</div>
+```
 
-目前参考iphone6/7/8
+#### 基础选择器
 
-看宽度  1倍图逻辑分辨率375，2倍图物理分辨率750
+规则：选择器**优先级高的样式生效**。
 
-#### 适配方案
+公式：**通配符选择器 < 标签选择器 < 类选择器 < id选择器 < 行内样式 < !important**
 
-- 宽度适配
+​           **（选中标签的范围越大，优先级越低）**
 
-  宽度自适应，高度为像素单位，百分比布局和flex布局
+#### 复合选择器-叠加
 
-- 等比适配
+叠加计算：如果是复合选择器，则需要**权重叠加**计算。
 
-  rem
+公式：（每一级之间不存在进位）
 
-  vw
+![1680319646205](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680319646205.png)
 
-#### rem适配
+规则：
 
-rem 单位为相对单位
+* 从左向右依次比较选个数，同一级个数多的优先级高，如果个数相同，则向后比较
+* **!important 权重最高**
+* 继承权重最低
 
-rem单位相对于html标签的字号计算结果也就是根字号
+## 03-Emmet 写法
 
-1rem=1html字号大小
+Emmet写法：代码的**简写**方式，输入缩写 VS Code 会自动生成对应的代码。 
 
-##### 媒体查询
+* HTML标签
 
-能够检查视口的宽度，编写差异化的css
+![1680319897697](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680319897697.png)
 
-当某个条件成立，执行对应的css
+* CSS：大多数简写方式为属性单词的**首字母** 
 
-``` css
-@media (媒体特性) {
-    选择器{
-        属性
-    }
+![1680319926111](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680319926111.png)
+
+## 04-背景属性
+
+![1680319971861](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680319971861.png)
+
+### 背景图
+
+网页中，使用背景图实现装饰性的图片效果。
+
+* 属性名：**background-image**（bgi）
+* 属性值：url(背景图 URL)
+
+```css
+div {
+  width: 400px;
+  height: 400px;
+
+  background-image: url(./images/1.png);
 }
 ```
 
-实现根据不同的视口宽度，配置不同的属性
+> 提示：背景图默认有**平铺（复制）效果**。 
 
-##### 不同视口宽度设置html字号多少合适？
+### 平铺方式
 
-rem布局方案中，将网页分成10份，html标签的字号为视口宽度的十分之一
+属性名：**background-repeat**（bgr） 
 
-如视口宽度375  ，html字号为37.5px
+![1680320072292](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680320072292.png)
 
-320 就是32px
+```css
+div {
+  width: 400px;
+  height: 400px;
+  background-color: pink;
+  background-image: url(./images/1.png);
 
-414就是41.4
-
-##### rem-flexible.js
-
-淘宝开发的用来一个适配移动端的js库
-
-核心原理，根据不用的视口宽度给网页中html根节点设置不同的font-size
-
-body标签中最下面引入js
-
-##### 关于设计稿中的像素与rem转换
-
-1. 确定基准根字号（html），设计稿宽度，确定参考设备宽度（视口），确定基准根字号（十分之一视口宽度）
-
-2. rem单位尺寸=px单位数值/基准根字号
-
-   ![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-29_14-17-19.png)
-
-### less
-
-css预处理器，扩充了css语言，使css具备一定的逻辑能力，计算能力
-
-注意：浏览器不识别less代码，目前阶段需要引入对应的css
-
-使用插件保存less后生成对应的css文件
-
-vscode插件easy less
-
-#### less注释
-
-单行  
-
-//   ctrl+/
-
-块注释
-
-/* */  Shift+alt+a
-
-单行注释不会生成到css，因为css不支持//注释
-
-#### 运算
-
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-29_14-35-17.png)
-
-如果写了多个单位，以第一个为准
-
-#### 嵌套
-
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-29_14-40-03.png)
-
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-29_14-43-00.png)
-
-&符号在谁的括号中表示谁，配合hover或者nth-child结构伪类使用
-
-#### 变量
-
-定义  @名称：数据；
-
-使用 属性：@名称
-
-#### 导入
-
-导入less公共样式文件
-
-可以省略后缀名
-
-@import 路径
-
-#### 导出
-
-第一行添加
-
-//out: 路径
-
-如果是文件夹，最后要加/ 
-
-禁用导出 //out:false 
-
-### vw适配（可以直接实现移动适配效果）
-
-相对视口的尺寸计算结果
-
-vw：viewport width
-
-1vw =1/100 视口宽度
-
-vh viewport height
-
-1vh = 1/100 视口高度
-
-#### vm和vh计算
-
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-29_20-27-36.png)
-
-#### vh单位问题
-
-vw和vh不能混用，会导致盒子变形，一般常用vw
-
-### 移动端项目
-
-可以不做搜索优化也就是logo不需要包在h1标签里
-
-#### img图片直接铺满父级盒子的小技巧
-
-除了改和父级一样的宽高，还可以采用这种方法完美的铺满盒子，使用图片等比例完美的展现出来
-
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-29_21-46-33.png)
-
-### 响应式网页
-
-一套代码，适配多端，不管屏幕多大，手机还是电脑都能完美展示
-
-#### 解决方案
-
-- 媒体查询
-
-  检测宽度 改变样式，太麻烦
-
-- bootstrap框架
-
-##### 媒体查询
-
-max-width就是 <=
-
-min-width就是>=
-
-``` css
-@media (max-width:200px){
-    选择器{
-        参数
-    }
+  background-repeat: no-repeat;
 }
-
-@media 关键词 媒体类型 and （媒体特性）{
-    选择器{
-        参数
-    }
-}
-
-关键字and not only
 ```
 
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-30_14-13-58.png)
+### 背景图位置
 
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-30_14-14-27.png)
+属性名：**background-position**（bgp）
 
-注意书写顺序，因为css的特性层叠性，后面的会覆盖前面的样式
+属性值：水平方向位置 垂直方向位置
 
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-30_13-54-32.png)
+* 关键字
 
-##### 媒体查询-外部css，满足某些条件媒体样式比较多考虑这种方法
+![1680320211424](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680320211424.png)
 
-媒体查询作为一个css文件，单独引入,css里直接写样式，媒体查询条件放在link标签中，符合媒体条件的应用该css样式
+* 坐标
+  * 水平：正数向右；负数向左
+  * 垂直：正数向下；负数向上
 
-逻辑符 媒体类型 and （媒体特性）  ：这是完整的写法一般只用一个括号写条件
+```css
+div {
+  width: 400px;
+  height: 400px;
+  background-color: pink;
+  background-image: url(./images/1.png);
+  background-repeat: no-repeat;
 
-``` html
-<link rel="stylesheet" media="(max-width:768px)"  href="style.css">
+  background-position: center bottom;
+  background-position: 50px -100px;
+  background-position: 50px center;
+}
 ```
 
-#### bootstrap
+> 提示：
+>
+> * 关键字取值方式写法，可以颠倒取值顺序
+> * 可以只写一个关键字，另一个方向默认为居中；数字只写一个值表示水平方向，垂直方向为居中
 
-twitter公司的前端框架，框架？ 人家编写好的代码，按人家的要求使用
+### 背景图缩放
 
-bootstrap.min.css 压缩后的，格式乱，但是体积小（生产用这个）
+作用：设置背景图大小
 
-bootstrap.css  完整格式的，两个文件一样，只是格式不一样（这个学习的时候用）
+属性名：**background-size**（bgz）
 
-版心居中类container
+常用属性值：
 
-##### 使用
+* 关键字
+  *  cover：等比例缩放背景图片以完全覆盖背景区，可能背景图片部分看不见
+  * contain：等比例缩放背景图片以完全装入背景区，可能背景区部分空白
 
-直接引入css，调用对应选择器实现效果
+* 百分比：根据盒子尺寸计算图片大小
+* 数字 + 单位（例如：px）
 
-##### 栅格系统
+```css
+div {
+  width: 500px;
+  height: 400px;
+  background-color: pink;
+  background-image: url(./images/1.png);
+  background-repeat: no-repeat;
+  
+  background-size: cover;
+  background-size: contain;
+}
+```
 
-是将网页宽度分为12份，每个盒子占用对应的份数
+> 提示：工作中，**图片比例与盒子比例相同**，使用 cover 或 contain 缩放背景图效果相同。
 
-例如一行四个盒子，那么每个盒子占的就是3份 
+### 背景图固定
 
-bootstrap已经分好了宽度的响应区间 6个响应区间
+作用：背景不会随着元素的内容滚动。
 
-row里面有flex布局
+属性名：**background-attachment**（bga）
 
-![](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/Snipaste_2023-11-30_14-43-09.png)
+属性值：**fixed**
 
-vscdoe显示类名插件
+```css
+body {
+  background-image: url(./images/bg.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+```
 
-IntelliSense for CSS class names ...
+### 背景复合属性
 
-这里开发项目有个小，关于盒子边距与背景填充的问题，看代码最后一个案例
+属性名：**background**（bg）
 
-##### 全局样式
+属性值：背景色 背景图 背景图平铺方式 背景图位置/背景图缩放  背景图固定（**空格隔开各个属性值，不区分顺序**）
 
-看官网
+```css
+div {
+  width: 400px;
+  height: 400px;
 
-[Containers · Bootstrap v5 中文文档 v5.3 | Bootstrap 中文网 (bootcss.com)](https://v5.bootcss.com/docs/layout/containers/)
+  background: pink url(./images/1.png) no-repeat right center/cover;
+}
+```
 
-##### 组件components
+## 05-显示模式
 
-引入css
+显示模式：标签（元素）的显示方式。 
 
-引入js（看是否依赖js，简单区别有动态功能的）
+![1680320464551](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680320464551.png)
 
-复制结构应用
+作用：布局网页的时候，根据标签的显示模式选择合适的标签摆放内容。 
 
-##### 字体图标
+### 块级元素
 
-官网图标库，引入css使用
+特点：
 
-[Bootstrap 图标库 · Bootstrap 官方开源图标（icon）库 (bootcss.com)](https://icons.bootcss.com/#install)
+* 独占一行
+* 宽度默认是父级的100%
+* 添加宽高属性生效
+
+![1680320578369](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680320578369.png)
+
+### 行内元素
+
+特点：
+
+* 一行可以显示多个
+* 设置宽高属性不生效
+* 宽高尺寸由内容撑开
+
+![1680320583985](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680320583985.png)
+
+### 行内块元素 
+
+特点：
+
+* 一行可以显示多个
+* 设置宽高属性生效
+* 宽高尺寸也可以由内容撑开
+
+![1680320590005](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680320590005.png)
+
+### 转换显示模式
+
+属性：**display**
+
+![1680320613034](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680320613034.png)
+
+
+
+## 06-综合案例一-热词
+
+![1680320664821](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680320664821.png)
+
+### HTML标签
+
+```html
+<a href="#">HTML</a>
+<a href="#">CSS</a>
+<a href="#">JavaScript</a>
+<a href="#">Vue</a>
+<a href="#">React</a>
+```
+
+### CSS样式
+
+```html
+<style>
+/* 默认效果 */
+a {
+display: block;
+width: 200px;
+height: 80px;
+background-color: #3064bb;
+color: #fff;
+text-decoration: none;
+text-align: center;
+line-height: 80px;
+font-size: 18px;
+}
+
+/* 鼠标悬停的效果 */
+a:hover {
+background-color: #608dd9;
+}
+</style>
+```
+
+## 07-综合案例二 – banner 效果 
+
+![1680320758496](https://cdn.jsdelivr.net/gh/baymaxcoding/pic_rep/imgs/1680320758496.png)
+
+### HTML标签
+
+```html
+<div class="banner">
+  <h2>让创造产生价值</h2>
+  <p>我们希望小游戏平台可以提供无限的可能性，让每一个创作者都可以将他们的才华和创意传递给用户。</p>
+  <a href="#">我要报名</a>
+</div>
+```
+
+
+
+### CSS样式
+
+```html
+<style>
+  .banner {
+    height: 500px;
+    background-color: #f3f3f4;
+    background-image: url(./images/bk.png);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+
+    /* 文字控制属性，继承给子级 */
+    text-align: right;
+    color: #333;
+  }
+
+  .banner h2 {
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 100px;
+  }
+
+  .banner p {
+    font-size: 20px;
+  }
+
+  .banner a {
+    width: 125px;
+    height: 40px;
+    background-color: #f06b1f;
+
+    display: inline-block;
+    /* 转块级无法右对齐，因为块元素独占一行 */
+    /* display: block; */
+
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+  }
+</style>
+```
+
